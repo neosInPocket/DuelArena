@@ -6,12 +6,7 @@ using UnityEngine;
 using ExitGames.Client.Photon;
 
 public class MatchmakingManager : MonoBehaviourPunCallbacks
-{   
-    void Start()
-    {
-        
-    }
-
+{
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log("Player " + newPlayer.NickName + " entered the room");

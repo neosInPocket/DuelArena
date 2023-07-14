@@ -6,15 +6,8 @@ using UnityEngine.UI;
 
 public class UIPlayerInfoPanel : MonoBehaviour
 {
-    [SerializeField] Image icon;
     [SerializeField] TMP_Text nickname;
     [SerializeField] Image colorIcon;
-
-    private Sprite Icon
-    {
-        get => icon.sprite;
-        set => icon.sprite = value;
-    }
 
     private string NickName
     {
@@ -22,16 +15,15 @@ public class UIPlayerInfoPanel : MonoBehaviour
         set => nickname.text = value;
     }
 
-    private Sprite ColorIcon
+    private Color ColorIcon
     {
-        get => colorIcon.sprite;
-        set => colorIcon.sprite = value;
+        get => colorIcon.color;
+        set => colorIcon.color = value;
     }
 
-    public void SetInfo(Sprite icon, Sprite colorIcon, string nickName)
+    public void SetInfo(PlayerInfo playerInfo)
     {
-        NickName = nickName;
-        Icon = icon;
-        ColorIcon = colorIcon;
+        NickName = playerInfo.NickName;
+        ColorIcon = playerInfo.Color;
     }
 }

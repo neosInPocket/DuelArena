@@ -183,9 +183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca32a649311c3340a46fd16e329e71d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIcon: {fileID: 2548512236473540391}
-  playerNickname: {fileID: 3801090991350225903}
-  playerColorIcon: {fileID: 471960449616723821}
+  icon: {fileID: 2548512236473540391}
+  nickname: {fileID: 3801090991350225903}
+  colorIcon: {fileID: 471960449616723821}
 --- !u!1 &2548512236473540385
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60.2
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -13,41 +13,25 @@ public class UIMatchmakingController : MonoBehaviour
 
     private void OnEnable()
     {
-        PhotonNetwork.NetworkingClient.EventReceived += NetworkingClient_EventReceived;
+        PhotonNetwork.NetworkingClient.EventReceived += OnNetworkEventReceived;
+        OnNetworkEventReceived(null);
     }
 
     private void OnDisable()
     {
-        PhotonNetwork.NetworkingClient.EventReceived -= NetworkingClient_EventReceived;
+        PhotonNetwork.NetworkingClient.EventReceived -= OnNetworkEventReceived;
     }
 
-    private void NetworkingClient_EventReceived(EventData obj)
+    private void OnNetworkEventReceived(EventData obj)
     {
-        Player player = (Player)obj.CustomData;
-
-        if (player == null)
-        {
-            return;
-        }
-
         Room currentRoom = PhotonNetwork.CurrentRoom;
-        playerCountText.text = $"{currentRoom.MaxPlayers}/{currentRoom.PlayerCount}";
+        playerCountText.text = $"{currentRoom.PlayerCount}/{currentRoom.MaxPlayers}";
 
-        if (obj.Code == ServerEventCodes.PLAYER_ENTERED_ROOM || obj.Code == ServerEventCodes.PLAYER_LEFT_ROOM)
+        DeleteObjectChildren(playerContainer);
+        foreach (var currentPlayer in currentRoom.Players)
         {
-            DeleteObjectChildren(playerContainer);
-            foreach (var currentPlayer in currentRoom.Players)
-            {
-                var playerInfoItem = Instantiate(playerInfoItemPrefab, playerContainer);
-                playerInfoItem.SetInfo(null, null, player.NickName);
-            }
-            return;
-        }
-
-        if (obj.Code == ServerEventCodes.PLAYER_LEFT_ROOM)
-        {
-            
-            return;
+            var playerInfoItem = Instantiate(playerInfoItemPrefab, playerContainer);
+            //playerInfoItem.SetInfo(null, null, currentPlayer.Value.NickName);
         }
     }
 
