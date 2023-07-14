@@ -10,6 +10,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
+
     }
 
     public bool ConnectPlayerToRegion(string region)
@@ -20,6 +21,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to master " + PhotonNetwork.CloudRegion);
+        PhotonNetwork.JoinLobby();
     }
 
     public override void OnDisconnected(DisconnectCause cause)
