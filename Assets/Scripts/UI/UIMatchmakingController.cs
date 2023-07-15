@@ -10,13 +10,14 @@ public class UIMatchmakingController : MonoBehaviour
     [SerializeField] TMP_Text playerCountText;
     [SerializeField] Transform playerContainer;
     [SerializeField] UIPlayerInfoPanel playerInfoItemPrefab;
+    [SerializeField] PhotonView playerListPhotonView;
 
     private Room currentRoom;
 
     private void OnEnable()
     {
         PhotonNetwork.NetworkingClient.EventReceived += OnNetworkEventReceived;
-        RefreshRoomInfo();
+        SyncRoomInfo();
     }
 
     private void OnDisable()
@@ -26,10 +27,17 @@ public class UIMatchmakingController : MonoBehaviour
 
     private void OnNetworkEventReceived(EventData obj)
     {
-        RefreshRoomInfo();
+        PlayerInfo playerInfo = obj.CustomData as PlayerInfo;
+        if (playerInfo == null)
+        {
+            return;
+        }
+
+        playerListPhotonView.RPC("SyncRoomInfo", RpcTarget.AllBuffered, playerInfo);
     }
 
-    private void RefreshRoomInfo()
+    [PunRPC]
+    private void SyncRoomInfo()
     {
         currentRoom = PhotonNetwork.CurrentRoom;
 
