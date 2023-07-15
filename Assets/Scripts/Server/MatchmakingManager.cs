@@ -7,25 +7,43 @@ using ExitGames.Client.Photon;
 
 public class MatchmakingManager : MonoBehaviourPunCallbacks
 {
+    private void Start()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+    }
+
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.Log("Player " + newPlayer.NickName + " entered the room");
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions();
+        raiseEventOptions.Receivers = ReceiverGroup.All;
         PhotonNetwork.RaiseEvent(
             ServerEventCodes.PLAYER_ENTERED_ROOM, 
-            Global.GetPlayerInfo(newPlayer), 
-            RaiseEventOptions.Default, 
-            SendOptions.SendUnreliable
+            newPlayer,
+            raiseEventOptions, 
+            SendOptions.SendReliable
             );
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        Debug.Log("Player " + otherPlayer.NickName + " left the room");
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions();
+        raiseEventOptions.Receivers = ReceiverGroup.All;
         PhotonNetwork.RaiseEvent(
             ServerEventCodes.PLAYER_ENTERED_ROOM,
-            Global.GetPlayerInfo(otherPlayer),
+            otherPlayer,
             RaiseEventOptions.Default,
-            SendOptions.SendUnreliable
+            SendOptions.SendReliable
             );
+    }
+
+    public void StartGame()
+    {
+        PhotonNetwork.LoadLevel("Game");
+    }
+
+    public void LeaveCurrentRoom()
+    {
+        PhotonNetwork.LeaveRoom(false);
+        PhotonNetwork.LoadLevel("Lobby");
     }
 }

@@ -3,11 +3,14 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
+using Image = UnityEngine.UI.Image;
 
 public class UIMatchmakingController : MonoBehaviour
 {
     [SerializeField] TMP_Text playerCountText;
+    [SerializeField] Button startGameButton;
+    [SerializeField] Animator loadingImageAnimator;
     [SerializeField] Transform playerContainer;
     [SerializeField] UIPlayerInfoPanel playerInfoItemPrefab;
     [SerializeField] PhotonView playerListPhotonView;
@@ -18,6 +21,11 @@ public class UIMatchmakingController : MonoBehaviour
     {
         PhotonNetwork.NetworkingClient.EventReceived += OnNetworkEventReceived;
         SyncRoomInfo();
+
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            startGameButton.gameObject.SetActive(false);
+        }
     }
 
     private void OnDisable()
@@ -27,13 +35,13 @@ public class UIMatchmakingController : MonoBehaviour
 
     private void OnNetworkEventReceived(EventData obj)
     {
-        PlayerInfo playerInfo = obj.CustomData as PlayerInfo;
-        if (playerInfo == null)
+        Player connectedPlayer = obj.CustomData as Player;
+        if (connectedPlayer == null)
         {
             return;
         }
 
-        playerListPhotonView.RPC("SyncRoomInfo", RpcTarget.AllBuffered, playerInfo);
+        playerListPhotonView.RPC("SyncRoomInfo", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
@@ -46,7 +54,17 @@ public class UIMatchmakingController : MonoBehaviour
         foreach (var player in currentRoom.Players)
         {
             var playerInfoItem = Instantiate(playerInfoItemPrefab, playerContainer);
-            playerInfoItem.SetInfo(Global.GetPlayerInfo(player.Value));
+            playerInfoItem.SetInfo(player.Value);
+        }
+
+        if (currentRoom.PlayerCount == currentRoom.MaxPlayers)
+        {
+            startGameButton.interactable = true;
+            loadingImageAnimator.SetTrigger("RoomIsReady");
+        }
+        else
+        {
+            startGameButton.interactable = false;
         }
     }
 
@@ -57,4 +75,6 @@ public class UIMatchmakingController : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
+
+
 }

@@ -10,13 +10,13 @@ public class UIExceptionPopup : MonoBehaviour
     [SerializeField] TMP_Text messageText;
     void Start()
     {
-        ErrorEvent.Instance.OnError += OnError;
+        ServerEvent.Instance.OnEvent += OnError;
         gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
-        ErrorEvent.Instance.OnError -= OnError;
+        ServerEvent.Instance.OnEvent -= OnError;
     }
 
     private void OnError(string errorMessage)

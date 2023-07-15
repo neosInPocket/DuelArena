@@ -1,3 +1,4 @@
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,15 +16,15 @@ public class UIPlayerInfoPanel : MonoBehaviour
         set => nickname.text = value;
     }
 
-    private Color ColorIcon
+    private Vector3 ColorIcon
     {
-        get => colorIcon.color;
-        set => colorIcon.color = value;
+        get => new Vector3(colorIcon.color.r, colorIcon.color.g, colorIcon.color.b);
+        set => colorIcon.color = new Color(value.x, value.y, value.z);
     }
 
-    public void SetInfo(PlayerInfo playerInfo)
+    public void SetInfo(Player player)
     {
-        NickName = playerInfo.NickName;
-        ColorIcon = playerInfo.Color;
+        NickName = player.NickName;
+        ColorIcon = (Vector3)player.CustomProperties["Color"];
     }
 }

@@ -20,35 +20,17 @@ public class PlayerManager : MonoBehaviour
         {
             throw new ArgumentException("Nickname must contain at least 1 symbol");
         }
-        
-        if (Global.AllPlayers.Select(x => x.NickName).Contains(nickName))
-        {
-            throw new ArgumentException("This nickname is unavaliable"); 
-        }
 
-        PlayerInfo playerInfo = new PlayerInfo(nickName, GenerateUniquePlayerColor(), PhotonNetwork.LocalPlayer);
-        Global.AddNewPlayer(playerInfo);
+        PhotonNetwork.LocalPlayer.CustomProperties["Color"] = GetRandomColor();
+        PhotonNetwork.NickName = nickName;
     }
 
-    public static Color GenerateUniquePlayerColor()
-    {
-        Color rngColor = GetRandomColor();
-        List<Color> existingColors = Global.AllPlayers.Select(x => x.Color).ToList();
-        
-        while (existingColors.Contains(rngColor))
-        {
-            rngColor = GetRandomColor();
-        }
-
-        return rngColor;
-    }
-
-    private static Color GetRandomColor()
+    private static Vector3 GetRandomColor()
     {
         float r = Random.value;
         float g = Random.value;
         float b = Random.value;
 
-        return new Color(r, g, b);
+        return new Vector3(r, g, b);
     }
 }

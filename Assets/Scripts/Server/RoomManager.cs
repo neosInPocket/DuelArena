@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.XR;
+using WebSocketSharp;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -20,11 +21,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        var existingPlayer = Global.GetCurrentPlayerInfo();
-
-        if (existingPlayer == null) 
+        if (PhotonNetwork.LocalPlayer.NickName.IsNullOrEmpty()) 
         {
-            ErrorEvent.Instance.RaiseError("You must first enter your nickname in the settings");
+            ServerEvent.Instance.RaiseEvent("You must first enter your nickname in the settings");
             return;
         }
 
@@ -45,11 +44,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        ErrorEvent.Instance.RaiseError(message);
+        ServerEvent.Instance.RaiseEvent(message);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        ErrorEvent.Instance.RaiseError(message);
+        ServerEvent.Instance.RaiseEvent(message);
     }
 }
