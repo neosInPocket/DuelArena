@@ -11,10 +11,12 @@ public class UIMatchmakingController : MonoBehaviour
     [SerializeField] Transform playerContainer;
     [SerializeField] UIPlayerInfoPanel playerInfoItemPrefab;
 
+    private Room currentRoom;
+
     private void OnEnable()
     {
         PhotonNetwork.NetworkingClient.EventReceived += OnNetworkEventReceived;
-        OnNetworkEventReceived(null);
+        RefreshRoomInfo();
     }
 
     private void OnDisable()
@@ -24,14 +26,19 @@ public class UIMatchmakingController : MonoBehaviour
 
     private void OnNetworkEventReceived(EventData obj)
     {
-        Room currentRoom = PhotonNetwork.CurrentRoom;
-        playerCountText.text = $"{currentRoom.PlayerCount}/{currentRoom.MaxPlayers}";
+        RefreshRoomInfo();
+    }
 
+    private void RefreshRoomInfo()
+    {
+        currentRoom = PhotonNetwork.CurrentRoom;
+
+        playerCountText.text = $"{currentRoom.PlayerCount}/{currentRoom.MaxPlayers}";
         DeleteObjectChildren(playerContainer);
-        foreach (var currentPlayer in currentRoom.Players)
+        foreach (var player in currentRoom.Players)
         {
             var playerInfoItem = Instantiate(playerInfoItemPrefab, playerContainer);
-            //playerInfoItem.SetInfo(null, null, currentPlayer.Value.NickName);
+            playerInfoItem.SetInfo(Global.GetPlayerInfo(player.Value));
         }
     }
 

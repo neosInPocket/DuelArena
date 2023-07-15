@@ -1,34 +1,32 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using WebSocketSharp;
 using Color = UnityEngine.Color;
+using Random = UnityEngine.Random;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] TMP_InputField nickNameInputField;
-    [SerializeField] TMP_Text errorText;
-
-    public void SaveNewPlayer()
+    public void SaveNewPlayer(string nickName)
     {
-        string nickName = nickNameInputField.text;
         if (nickName.IsNullOrEmpty())
         {
-            errorText.text = "Nickname must contain at least 1 symbol";
-            return;
+            throw new ArgumentException("Nickname must contain at least 1 symbol");
         }
         
         if (Global.AllPlayers.Select(x => x.NickName).Contains(nickName))
         {
-            errorText.text = "This nickname is unavaliable";
-            return;
+            throw new ArgumentException("This nickname is unavaliable"); 
         }
-        PlayerInfo playerInfo = new PlayerInfo(nickNameInputField.text, GenerateUniquePlayerColor());
+
+        PlayerInfo playerInfo = new PlayerInfo(nickName, GenerateUniquePlayerColor(), PhotonNetwork.LocalPlayer);
         Global.AddNewPlayer(playerInfo);
     }
 

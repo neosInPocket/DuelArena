@@ -19,7 +19,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             return;
         }
-        
+
+        var existingPlayer = Global.GetCurrentPlayerInfo();
+
+        if (existingPlayer == null) 
+        {
+            ErrorEvent.Instance.RaiseError("You must first enter your nickname in the settings");
+            return;
+        }
+
         currentRoomOptions = new RoomOptions();
         currentRoomOptions.MaxPlayers = 2;
         PhotonNetwork.CreateRoom(roomCreateField.text, currentRoomOptions, TypedLobby.Default);
@@ -30,11 +38,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(roomEnterField.text);
     }
 
-    public override void OnCreatedRoom()
-    {
-        Debug.Log("Created room");
-    }
-
     public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel("Loading");
@@ -42,13 +45,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        Debug.Log("Failed to create room" + message);
         ErrorEvent.Instance.RaiseError(message);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.Log("Failed to join the room" + message);
         ErrorEvent.Instance.RaiseError(message);
     }
 }

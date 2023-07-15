@@ -12,7 +12,7 @@ public class MatchmakingManager : MonoBehaviourPunCallbacks
         Debug.Log("Player " + newPlayer.NickName + " entered the room");
         PhotonNetwork.RaiseEvent(
             ServerEventCodes.PLAYER_ENTERED_ROOM, 
-            newPlayer, 
+            Global.GetPlayerInfo(newPlayer), 
             RaiseEventOptions.Default, 
             SendOptions.SendUnreliable
             );
@@ -23,7 +23,7 @@ public class MatchmakingManager : MonoBehaviourPunCallbacks
         Debug.Log("Player " + otherPlayer.NickName + " left the room");
         PhotonNetwork.RaiseEvent(
             ServerEventCodes.PLAYER_ENTERED_ROOM,
-            otherPlayer,
+            Global.GetPlayerInfo(otherPlayer),
             RaiseEventOptions.Default,
             SendOptions.SendUnreliable
             );
