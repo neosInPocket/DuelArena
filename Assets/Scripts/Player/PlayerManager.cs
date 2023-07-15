@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using WebSocketSharp;
@@ -32,5 +33,10 @@ public class PlayerManager : MonoBehaviour
         float b = Random.value;
 
         return new Vector3(r, g, b);
+    }
+
+    public static Color GetColorFromVector(Vector3 vector)
+    {
+        return new Color(vector.x, vector.y, vector.z);
     }
 }

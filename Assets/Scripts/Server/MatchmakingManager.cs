@@ -31,7 +31,7 @@ public class MatchmakingManager : MonoBehaviourPunCallbacks
         PhotonNetwork.RaiseEvent(
             ServerEventCodes.PLAYER_ENTERED_ROOM,
             otherPlayer,
-            RaiseEventOptions.Default,
+            raiseEventOptions,
             SendOptions.SendReliable
             );
     }
