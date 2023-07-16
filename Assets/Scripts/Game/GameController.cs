@@ -11,24 +11,14 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        foreach (var player in PhotonNetwork.CurrentRoom.Players.Values)
+        if (PhotonNetwork.LocalPlayer.IsMasterClient)
         {
-            var currentSpawnPoint = (Vector3)player.CustomProperties["SpawnPoint"];
-            if (currentSpawnPoint == spawnPointLeft.position)
-            {
-                SetPlayerSpawnPoint(spawnPointRight);
-                return;
-            }
-
-            if (currentSpawnPoint == spawnPointRight.position)
-            {
-                SetPlayerSpawnPoint(spawnPointLeft);
-                return;
-            }
-
+            SetPlayerSpawnPoint(spawnPointLeft);
+        }
+        else
+        {
             SetPlayerSpawnPoint(spawnPointRight);
         }
-        
     }
 
     private void SetPlayerSpawnPoint(Transform spawnPoint)

@@ -23,6 +23,7 @@ public class PlayerHealthBar : MonoBehaviour
         photonView.RPC("RefreshHealthBar", RpcTarget.AllViaServer, data);
     }
 
+    [PunRPC]
     private void RefreshHealthBar(float data)
     {
         fillImage.fillAmount = data / 100;

@@ -38,6 +38,7 @@ public class MatchmakingManager : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
+        InitPlayersSpawnPoints();
         PhotonNetwork.LoadLevel("Game");
     }
 
@@ -45,5 +46,13 @@ public class MatchmakingManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LeaveRoom(false);
         PhotonNetwork.LoadLevel("Lobby");
+    }
+
+    private void InitPlayersSpawnPoints()
+    {
+        foreach (var player in PhotonNetwork.CurrentRoom.Players.Values)
+        {
+            player.CustomProperties["SpawnPoint"] = Vector3.zero;
+        }
     }
 }

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -20,7 +21,7 @@ public class PlayerShooting : MonoBehaviour
         }
 
         isFiring = true;
-        Instantiate(bulletPrefab, firePoint.position, FirePointTransform.rotation);
+        PhotonNetwork.Instantiate("Fireball", firePoint.position, FirePointTransform.rotation);
         yield return new WaitForSeconds(1 / fireRate);
         isFiring = false;
     }
