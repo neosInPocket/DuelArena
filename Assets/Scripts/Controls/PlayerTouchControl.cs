@@ -46,6 +46,11 @@ public abstract class PlayerTouchControl : MonoBehaviour
             float maxMovement = joystick.JoystickSize.x / 2f;
             Touch currentTouch = finger.currentTouch;
 
+            if (joystick.RectTransform == null)
+            {
+                return;
+            }
+            
             if (Vector2.Distance(
                     currentTouch.screenPosition,
                     joystick.RectTransform.anchoredPosition
@@ -70,6 +75,11 @@ public abstract class PlayerTouchControl : MonoBehaviour
     {
         if (finger == movementFinger)
         {
+            if (joystick.RectTransform == null)
+            {
+                return;
+            }
+            
             movementFinger = null;
             joystick.Knob.anchoredPosition = Vector2.zero;
             joystick.gameObject.SetActive(false);
@@ -79,6 +89,11 @@ public abstract class PlayerTouchControl : MonoBehaviour
 
     private void OnFingerDown(Finger finger)
     {
+        if (joystick.RectTransform == null)
+        {
+            return;
+        }
+
         if (joystick.IsRightScreen && (movementFinger == null && finger.screenPosition.x <= Screen.width / 2f))
         {
             return;
