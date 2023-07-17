@@ -1,37 +1,14 @@
-using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using WebSocketSharp;
 
-public class UIExceptionPopup : MonoBehaviour
+public class UIExceptionPopup : UIMessagePopup
 {
-    [SerializeField] Animator popupAnimator;
-    [SerializeField] TMP_Text messageText;
-    void Start()
+    protected override string Execute(byte code, object obj)
     {
-        ServerEvent.Instance.OnEvent += OnError;
-        gameObject.SetActive(false);
-    }
-
-    private void OnDestroy()
-    {
-        ServerEvent.Instance.OnEvent -= OnError;
-    }
-
-    private void OnError(string errorMessage)
-    {
-        messageText.text = errorMessage;
-        gameObject.SetActive(true);
-    }
-
-    public void HidePopupWindow()
-    {
-        popupAnimator.SetTrigger("Hide");
-    }
-
-    public void ClosePopupWindow()
-    {
-        gameObject.SetActive(false);
+        string message = obj.ToString();
+        return message;
     }
 }

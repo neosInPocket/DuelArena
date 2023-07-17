@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -6,9 +7,10 @@ using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public abstract class PlayerTouchControl : MonoBehaviour
 {
-    [SerializeField] private FloatingJoystick joystick;
+    protected FloatingJoystick joystick;
     private Finger movementFinger;
     protected Vector2 movementAmount;
+    [SerializeField] private PhotonView photonView;
 
     private void Start()
     {
@@ -24,6 +26,11 @@ public abstract class PlayerTouchControl : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+        
         EnhancedTouchSupport.Enable();
         Touch.onFingerDown += OnFingerDown;
         Touch.onFingerUp += OnFingerUp;
@@ -32,6 +39,11 @@ public abstract class PlayerTouchControl : MonoBehaviour
 
     private void OnDisable()
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+
         Touch.onFingerDown -= OnFingerDown;
         Touch.onFingerUp -= OnFingerUp;
         Touch.onFingerMove -= OnFingerMove;
@@ -89,11 +101,6 @@ public abstract class PlayerTouchControl : MonoBehaviour
 
     private void OnFingerDown(Finger finger)
     {
-        if (joystick.RectTransform == null)
-        {
-            return;
-        }
-
         if (joystick.IsRightScreen && (movementFinger == null && finger.screenPosition.x <= Screen.width / 2f))
         {
             return;

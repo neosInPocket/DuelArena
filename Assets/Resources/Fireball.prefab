@@ -124,6 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 20
   speed: 10
+  photonView: {fileID: 5534576815086118613}
 --- !u!58 &5789951625378107260
 CircleCollider2D:
   m_ObjectHideFlags: 0

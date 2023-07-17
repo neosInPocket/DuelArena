@@ -7,9 +7,15 @@ using ExitGames.Client.Photon;
 
 public class MatchmakingManager : MonoBehaviourPunCallbacks
 {
+    [SerializeField] bool skipFullRoom;
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
+        if (skipFullRoom)
+        {
+            InitPlayersData();
+            PhotonNetwork.LoadLevel(2);
+        }
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -38,7 +44,7 @@ public class MatchmakingManager : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
-        InitPlayersSpawnPoints();
+        InitPlayersData();
         PhotonNetwork.LoadLevel("Game");
     }
 
@@ -48,11 +54,12 @@ public class MatchmakingManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel("Lobby");
     }
 
-    private void InitPlayersSpawnPoints()
+    private void InitPlayersData()
     {
         foreach (var player in PhotonNetwork.CurrentRoom.Players.Values)
         {
             player.CustomProperties["SpawnPoint"] = Vector3.zero;
+            player.CustomProperties["Coins"] = 0;
         }
     }
 }

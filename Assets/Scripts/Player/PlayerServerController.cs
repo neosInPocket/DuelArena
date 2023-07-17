@@ -12,7 +12,7 @@ public class PlayerServerController : MonoBehaviour
         playerInfo = GetComponent<PlayerInfo>();
 
         Player currentPlayer = PhotonNetwork.LocalPlayer;
-        Color playerColor = PlayerManager.GetColorFromVector((Vector3)currentPlayer.CustomProperties["Color"]);
+        Color playerColor = PlayerManager.GetPlayerColor(currentPlayer);
         GetComponent<SpriteRenderer>().color = playerColor;
     }
 }

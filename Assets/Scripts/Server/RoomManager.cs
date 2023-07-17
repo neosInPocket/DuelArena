@@ -23,7 +23,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.LocalPlayer.NickName.IsNullOrEmpty()) 
         {
-            ServerEvent.Instance.RaiseEvent("You must first enter your nickname in the settings");
+            ServerEvent.Instance.RaiseEvent(0, "You must first enter your nickname in the settings");
             return;
         }
 
@@ -44,11 +44,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        ServerEvent.Instance.RaiseEvent(message);
+        ServerEvent.Instance.RaiseEvent(0, message);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        ServerEvent.Instance.RaiseEvent(message);
+        ServerEvent.Instance.RaiseEvent(0, message);
     }
 }

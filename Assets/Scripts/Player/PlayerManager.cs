@@ -1,8 +1,10 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
@@ -22,6 +24,11 @@ public class PlayerManager : MonoBehaviour
             throw new ArgumentException("Nickname must contain at least 1 symbol");
         }
 
+        if (nickName.Length > 10)
+        {
+            throw new ArgumentException("Nickname must contain less than 10 symbols");
+        }
+
         PhotonNetwork.LocalPlayer.CustomProperties["Color"] = GetRandomColor();
         PhotonNetwork.NickName = nickName;
     }
@@ -35,8 +42,22 @@ public class PlayerManager : MonoBehaviour
         return new Vector3(r, g, b);
     }
 
-    public static Color GetColorFromVector(Vector3 vector)
+    public static Color GetPlayerColor(Player player)
     {
-        return new Color(vector.x, vector.y, vector.z);
+        var vector = (Vector3)player.CustomProperties["Color"];
+        var color = new Color(vector.x, vector.y, vector.z);
+        return color;
+    }
+
+    public static Color GetColorFromVector(Vector3 vectorColor)
+    {
+        Color color = new Color(vectorColor.x, vectorColor.y, vectorColor.z);
+        return color;
+    }
+
+    public static Vector3 GetVectorFromColor(Color color)
+    {
+        Vector3 colorVector = new Vector3(color.r, color.g, color.b);
+        return colorVector;
     }
 }

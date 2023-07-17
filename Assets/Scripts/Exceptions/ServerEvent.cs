@@ -1,10 +1,11 @@
+using Photon.Realtime;
 using UnityEngine;
 
 public class ServerEvent : MonoBehaviour
 {
     public static ServerEvent Instance;
 
-    public delegate void ServerEventHandler(string errorMessage);
+    public delegate void ServerEventHandler(byte code, object obj);
     public event ServerEventHandler OnEvent;
 
     private void Awake()
@@ -19,8 +20,8 @@ public class ServerEvent : MonoBehaviour
         }
     }
 
-    public void RaiseEvent(string errorMessage)
+    public void RaiseEvent(byte code, object obj)
     {
-        OnEvent?.Invoke(errorMessage);
+        OnEvent?.Invoke(code, obj);
     }
 }

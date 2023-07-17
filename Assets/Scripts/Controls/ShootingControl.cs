@@ -1,6 +1,8 @@
+using ExitGames.Client.Photon.StructWrapping;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ShootingControl : PlayerTouchControl
 {
@@ -20,6 +22,10 @@ public class ShootingControl : PlayerTouchControl
 
     protected override void Initialize()
     {
+        var joysticks = GetComponentsInChildren<FloatingJoystick>();
+        joystick = joysticks.FirstOrDefault(x => x.IsRightScreen);
+        joystick.gameObject.SetActive(false);
+
         playerShooting = GetComponent<PlayerShooting>();
     }
 

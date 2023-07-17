@@ -31,12 +31,13 @@ public class UISettingsWindow : MonoBehaviour
         catch (ArgumentException ex)
         {
             errorText.text = ex.Message;
+            return;
         }
 
         HideWindow();
     }
 
-    private void HideWindow()
+    public void HideWindow()
     {
         windowAnimator.SetTrigger("Hide");
     }
