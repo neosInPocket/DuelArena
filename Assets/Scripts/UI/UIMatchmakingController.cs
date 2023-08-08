@@ -28,7 +28,7 @@ public class UIMatchmakingController : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         PhotonNetwork.NetworkingClient.EventReceived -= OnNetworkEventReceived;
     }

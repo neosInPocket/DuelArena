@@ -27,8 +27,4 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Disconnected " + cause.ToString());
     }
-
-     
-
-
 }
