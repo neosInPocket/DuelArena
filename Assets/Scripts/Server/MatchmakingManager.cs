@@ -23,7 +23,7 @@ public class MatchmakingManager : MonoBehaviourPunCallbacks
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions();
         raiseEventOptions.Receivers = ReceiverGroup.All;
         PhotonNetwork.RaiseEvent(
-            ServerEventCodes.PLAYER_ENTERED_ROOM, 
+            GameEventCodes.PLAYER_ENTERED_ROOM, 
             newPlayer,
             raiseEventOptions, 
             SendOptions.SendReliable
@@ -35,7 +35,7 @@ public class MatchmakingManager : MonoBehaviourPunCallbacks
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions();
         raiseEventOptions.Receivers = ReceiverGroup.All;
         PhotonNetwork.RaiseEvent(
-            ServerEventCodes.PLAYER_ENTERED_ROOM,
+            GameEventCodes.PLAYER_ENTERED_ROOM,
             otherPlayer,
             raiseEventOptions,
             SendOptions.SendReliable

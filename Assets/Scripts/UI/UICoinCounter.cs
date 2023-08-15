@@ -26,7 +26,7 @@ public class UICoinCounter : MonoBehaviour
     {
         Player sender = obj.CustomData as Player;
 
-        if (obj.Code != ServerEventCodes.PLAYER_COIN && sender == null && PhotonNetwork.LocalPlayer != sender)
+        if (obj.Code != GameEventCodes.PLAYER_COIN && sender == null && PhotonNetwork.LocalPlayer != sender)
         {
             return;
         }

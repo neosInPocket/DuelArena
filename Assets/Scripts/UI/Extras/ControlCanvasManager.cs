@@ -21,7 +21,7 @@ public class ControlCanvasManager : MonoBehaviour
 
     private void OnGameEvent(EventData obj)
     {
-        if (obj.Code == ServerEventCodes.PLAYER_DEATH)
+        if (obj.Code == GameEventCodes.PLAYER_DEATH)
         {
             gameObject.SetActive(false);
         }

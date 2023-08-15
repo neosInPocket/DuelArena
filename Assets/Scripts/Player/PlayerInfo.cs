@@ -43,7 +43,7 @@ public class PlayerInfo : MonoBehaviour
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions();
             raiseEventOptions.Receivers = ReceiverGroup.MasterClient;
             PhotonNetwork.RaiseEvent(
-                ServerEventCodes.PLAYER_DEATH,
+                GameEventCodes.PLAYER_DEATH,
                 PhotonNetwork.LocalPlayer,
                 raiseEventOptions,
                 SendOptions.SendReliable
@@ -67,7 +67,7 @@ public class PlayerInfo : MonoBehaviour
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions();
         raiseEventOptions.Receivers = ReceiverGroup.All;
         PhotonNetwork.RaiseEvent(
-                ServerEventCodes.PLAYER_COIN,
+                GameEventCodes.PLAYER_COIN,
                 PhotonNetwork.LocalPlayer,
                 raiseEventOptions,
                 SendOptions.SendReliable

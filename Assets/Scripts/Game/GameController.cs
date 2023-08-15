@@ -15,7 +15,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private Transform spawnPointRight;
     [SerializeField] private int coinGenerateTimeout;
     [SerializeField] private Tilemap grassTileMap;
-    [SerializeField] private UIGameMessagePopup gameMessagePopup;
 
     private bool isCoinBeingGenerated;
     private PhotonView photonView;
@@ -41,7 +40,7 @@ public class GameController : MonoBehaviour
 
     private void OnEventRecieved(EventData obj)
     {
-        if (obj.Code == ServerEventCodes.PLAYER_DEATH)
+        if (obj.Code == GameEventCodes.PLAYER_DEATH)
         {
             Player player = (Player)obj.CustomData;
             if (player == null)
@@ -68,7 +67,6 @@ public class GameController : MonoBehaviour
     [PunRPC]
     public void ShowGameResultWindow(string message)
     {
-        gameMessagePopup.WindowCaption = message;
     }
 
     private void FixedUpdate()

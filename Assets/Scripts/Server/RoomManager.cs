@@ -3,6 +3,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.XR;
@@ -10,45 +11,53 @@ using WebSocketSharp;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] TMP_InputField roomEnterField;
-    [SerializeField] TMP_InputField roomCreateField;
+    [SerializeField] private TMP_InputField roomNameText;
 
-    RoomOptions currentRoomOptions;
+    public string RoomName => roomNameText.text;
+
+    private RoomOptions currentRoomOptions;
     public void CreateRoom()
     {
         if (!PhotonNetwork.IsConnected)
         {
+            GameEvent.RaiseEvent(GameEventCodes.ERROR, "Check your internet connection");
+            return;
+        }
+
+        if (RoomName.IsNullOrEmpty() || RoomName.Length > 25)
+        {
+            GameEvent.RaiseEvent(GameEventCodes.ERROR, "Room name cannot be empty and has to contain less than 25 symbols");
             return;
         }
 
         if (PhotonNetwork.LocalPlayer.NickName.IsNullOrEmpty()) 
         {
-            ServerEvent.Instance.RaiseEvent(0, "You must first enter your nickname in the settings");
+            GameEvent.RaiseEvent(GameEventCodes.ERROR, "You must first enter your nickname in the settings");
             return;
         }
 
         currentRoomOptions = new RoomOptions();
         currentRoomOptions.MaxPlayers = 2;
-        PhotonNetwork.CreateRoom(roomCreateField.text, currentRoomOptions, TypedLobby.Default);
+        PhotonNetwork.CreateRoom(RoomName, currentRoomOptions, TypedLobby.Default);
     }
 
     public void JoinRoom()
     {
-        PhotonNetwork.JoinRoom(roomEnterField.text);
+        PhotonNetwork.JoinRoom(RoomName);
     }
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("Loading");
+        PhotonNetwork.LoadLevel(1);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        ServerEvent.Instance.RaiseEvent(0, message);
+        GameEvent.RaiseEvent(GameEventCodes.ERROR, message);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        ServerEvent.Instance.RaiseEvent(0, message);
+        GameEvent.RaiseEvent(GameEventCodes.ERROR, message);
     }
 }
