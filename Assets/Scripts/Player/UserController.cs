@@ -1,22 +1,14 @@
 using Photon.Pun;
 using Photon.Realtime;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
 using WebSocketSharp;
 using Color = UnityEngine.Color;
 using Random = UnityEngine.Random;
 
-public class PlayerManager : MonoBehaviour
-{
+public class UserController : MonoBehaviour
+{   
     public void SaveNewPlayer(string nickName)
     {
         if (nickName.IsNullOrEmpty())

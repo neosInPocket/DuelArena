@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Pun.Demo.PunBasics;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,14 +16,14 @@ public class PlayerDataControl : MonoBehaviour, IPunObservable
         if (stream.IsWriting)
         {
             Color color = spriteRenderer.color;
-            stream.SendNext(PlayerManager.GetVectorFromColor(color));
+            stream.SendNext(UserController.GetVectorFromColor(color));
 
             stream.SendNext(PhotonNetwork.LocalPlayer.NickName);
         }
         else if (stream.IsReading)
         {
             Vector3 vectorColor = (Vector3)stream.ReceiveNext();
-            spriteRenderer.color = PlayerManager.GetColorFromVector(vectorColor);
+            spriteRenderer.color = UserController.GetColorFromVector(vectorColor);
 
             nickNameText.text = stream.ReceiveNext().ToString();
         }

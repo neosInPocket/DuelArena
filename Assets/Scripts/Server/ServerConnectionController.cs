@@ -5,16 +5,17 @@ using Photon.Pun;
 using System.Runtime.CompilerServices;
 using Photon.Realtime;
 
-public class ConnectionManager : MonoBehaviourPunCallbacks
+public class ServerConnectionController : MonoBehaviourPunCallbacks
 {
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
+        PhotonNetwork.JoinLobby();
     }
 
-    public bool ConnectPlayerToRegion(string region)
+    public override void OnJoinedLobby()
     {
-        return PhotonNetwork.ConnectToRegion(region);
+        Debug.Log("Joined lobby");
     }
 
     public override void OnConnectedToMaster()

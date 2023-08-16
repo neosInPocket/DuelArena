@@ -10,5 +10,5 @@ public class GameEventCodes
     public const byte PLAYER_DEATH = 3;
     public const byte PLAYER_COIN = 4;
     public const byte PLAYER_WIN = 5;
-    public const byte ERROR = 6;
+    public const byte NOTIFICATION = 6;
 }

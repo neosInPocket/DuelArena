@@ -13,7 +13,7 @@ public class UISettingsWindow : MonoBehaviour
     [SerializeField] Button confirmButton;
     [SerializeField] Button closeButton; 
 
-    [SerializeField] PlayerManager playerManager;
+    [SerializeField] UserController playerManager;
 
     private void Start()
     {
