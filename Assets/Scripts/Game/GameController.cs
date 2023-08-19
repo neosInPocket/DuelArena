@@ -118,7 +118,7 @@ public class GameController : MonoBehaviour
     [PunRPC]
     private void SetPlayerData()
     {
-        playerInstance.GetComponent<SpriteRenderer>().color = UserController.GetPlayerColor(PhotonNetwork.LocalPlayer);
+        playerInstance.GetComponent<SpriteRenderer>().color = UserDataController.GetPlayerColor(PhotonNetwork.LocalPlayer);
         playerInstance.GetComponentInChildren<TMP_Text>().text = PhotonNetwork.LocalPlayer.NickName;
     }
 

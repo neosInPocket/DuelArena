@@ -13,7 +13,7 @@ public class UISettingsWindow : MonoBehaviour
     [SerializeField] Button confirmButton;
     [SerializeField] Button closeButton; 
 
-    [SerializeField] UserController playerManager;
+    [SerializeField] UserDataController dataController;
 
     private void Start()
     {
@@ -26,7 +26,7 @@ public class UISettingsWindow : MonoBehaviour
     {
         try
         {
-            playerManager.SaveNewPlayer(nickNameInputField.text);
+            dataController.SaveNewPlayer(nickNameInputField.text);
         }
         catch (ArgumentException ex)
         {

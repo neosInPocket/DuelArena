@@ -7,7 +7,7 @@ using WebSocketSharp;
 using Color = UnityEngine.Color;
 using Random = UnityEngine.Random;
 
-public class UserController : MonoBehaviour
+public class UserDataController : MonoBehaviour
 {   
     public void SaveNewPlayer(string nickName)
     {

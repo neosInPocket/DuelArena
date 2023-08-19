@@ -16,14 +16,14 @@ public class PlayerDataControl : MonoBehaviour, IPunObservable
         if (stream.IsWriting)
         {
             Color color = spriteRenderer.color;
-            stream.SendNext(UserController.GetVectorFromColor(color));
+            stream.SendNext(UserDataController.GetVectorFromColor(color));
 
             stream.SendNext(PhotonNetwork.LocalPlayer.NickName);
         }
         else if (stream.IsReading)
         {
             Vector3 vectorColor = (Vector3)stream.ReceiveNext();
-            spriteRenderer.color = UserController.GetColorFromVector(vectorColor);
+            spriteRenderer.color = UserDataController.GetColorFromVector(vectorColor);
 
             nickNameText.text = stream.ReceiveNext().ToString();
         }

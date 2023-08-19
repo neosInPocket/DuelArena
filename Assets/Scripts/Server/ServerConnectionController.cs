@@ -9,6 +9,11 @@ public class ServerConnectionController : MonoBehaviourPunCallbacks
 {
     void Start()
     {
+        
+    }
+
+    public void ConnectToServer()
+    {
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.JoinLobby();
     }
