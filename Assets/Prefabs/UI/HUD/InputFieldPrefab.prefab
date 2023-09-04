@@ -122,8 +122,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enter room name...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 99f973b60adb3e949b2b167174d717d2, type: 2}
-  m_sharedMaterial: {fileID: -4500315756381090912, guid: 99f973b60adb3e949b2b167174d717d2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c5254d4eabf9604498fa408ff4dfc629, type: 2}
+  m_sharedMaterial: {fileID: 5743032860930694448, guid: c5254d4eabf9604498fa408ff4dfc629, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -277,8 +277,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 99f973b60adb3e949b2b167174d717d2, type: 2}
-  m_sharedMaterial: {fileID: -4500315756381090912, guid: 99f973b60adb3e949b2b167174d717d2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c5254d4eabf9604498fa408ff4dfc629, type: 2}
+  m_sharedMaterial: {fileID: 5743032860930694448, guid: c5254d4eabf9604498fa408ff4dfc629, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.27
+  m_PixelsPerUnitMultiplier: 0.15
 --- !u!114 &1305770374752732861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,7 +513,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: c5254d4eabf9604498fa408ff4dfc629, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameEventListener : MonoBehaviour
 {
-    [SerializeField] private List<Executable> executables;
+    [SerializeField] private List<MonoBehaviour> executables;
     private void Start()
     {
         GameEvent.OnEvent += ProcessEvent;
@@ -19,7 +19,7 @@ public class GameEventListener : MonoBehaviour
     {
         foreach (var executable in executables)
         {
-            executable.Execute(code, obj);
+            //executable.Execute(code, obj);
         }
     }
 }

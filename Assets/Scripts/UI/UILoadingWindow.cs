@@ -6,6 +6,6 @@ public class UILoadingWindow : MonoBehaviour
 {
     [SerializeField] private Image progressBar;
     [SerializeField] private TMP_Text progressText;
-    [SerializeField]
+    
 
 }

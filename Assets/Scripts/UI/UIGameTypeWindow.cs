@@ -20,16 +20,16 @@ public class UIGameTypeWindow : MonoBehaviour
 
     private void PVPMatch()
     {
-        matchmakingController.Match(new PVPMatchBehaviour());
+        matchmakingController.MatchPVP();
     }
 
     private void PWFMatch()
     {
-        matchmakingController.Match(new PWFMatchBehavior());
+        matchmakingController.MatchPWF();
     }
 
     private void AIMatch()
     {
-        matchmakingController.Match(new AIMatchBehaviour());
+        matchmakingController.MatchAI();
     }
 }

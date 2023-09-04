@@ -9,7 +9,7 @@ public class ServerConnectionController : MonoBehaviourPunCallbacks
 {
     void Start()
     {
-        
+        ConnectToServer();
     }
 
     public void ConnectToServer()
@@ -34,7 +34,16 @@ public class ServerConnectionController : MonoBehaviourPunCallbacks
         Debug.Log("Disconnected " + cause.ToString());
     }
 
-     
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        foreach (var room in roomList)
+        {
+            print(room.Name);
+        };
+    }
 
-
+    public void Connectttt()
+    {
+        var test = new TestScript();
+    }
 }
