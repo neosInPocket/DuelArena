@@ -9,6 +9,7 @@ public class MatchmakingController : MonoBehaviour
 {
     [SerializeField] private List<ObserverContainer> _observers;
     [SerializeField] private RoomsCallbackController _roomsController;
+
     private IMatchBehaviour _currentMatch;
     public IMatchBehaviour CurrentMatch => _currentMatch;
 
@@ -20,13 +21,21 @@ public class MatchmakingController : MonoBehaviour
     private void Match(IMatchBehaviour match)
     {
         _currentMatch = match;
+        _currentMatch.MatchMade += OnMatchMade;
+
         match.Match();
         Notify(new MatchmakingEventArgs() { MatchmakingType = match.GetType(), Sender = this });
     }
 
+    private void OnMatchMade()
+    {
+        MatchLoader.LoadMatch(_currentMatch);
+    }
+
     public void Dispose()
     {
-        CurrentMatch?.Dispose();
+        _currentMatch?.Dispose();
+        _currentMatch.MatchMade -= OnMatchMade;
     }
 
     public void MatchPVP()

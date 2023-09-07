@@ -1,14 +1,15 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class MatchLoader : ObserverContainer
+public static class MatchLoader
 {
-    public override void OnNext(EventArgs args)
+    public static void LoadMatch(IMatchBehaviour match)
     {
-        if (args is not MatchmakingEventArgs mmArgs) return;
-
-
+        MatchDataSaver.SaveMatchData(new MatchData(match));
+        PhotonNetwork.LoadLevel(1);
     }
 }

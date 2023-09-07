@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using EventData = ExitGames.Client.Photon.EventData;
 
-public class GameController : MonoBehaviour
+public class MatchEntry : MonoBehaviour
 {
     [SerializeField] private Transform spawnPointLeft;
     [SerializeField] private Transform spawnPointRight;

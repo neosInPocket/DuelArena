@@ -1,6 +1,7 @@
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 
 public class RoomsCallbackController : MonoBehaviourPunCallbacks
@@ -12,12 +13,10 @@ public class RoomsCallbackController : MonoBehaviourPunCallbacks
         Observers.Add(observer);
         print("Subscribed");
     }
+
     private void Notify(object obj)
     {
-        foreach (var observer in Observers)
-        {
-            observer.OnRoomCallback(obj);
-        }
+        foreach (var observer in Observers) observer.OnRoomCallback(obj);
     }
 
     public override void OnJoinedRoom()
@@ -28,6 +27,7 @@ public class RoomsCallbackController : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
+        print("New player joined the room");
         Notify(newPlayer);
     }
 }

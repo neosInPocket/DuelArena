@@ -14,6 +14,7 @@ public class ServerConnectionController : MonoBehaviourPunCallbacks
 
     public void ConnectToServer()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.JoinLobby();
     }

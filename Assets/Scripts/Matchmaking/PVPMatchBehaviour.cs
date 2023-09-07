@@ -19,10 +19,9 @@ public class PVPMatchBehaviour : IMatchBehaviour, IRoomCallback
 
     public void OnRoomCallback(object obj)
     {
-        var player = obj as Player;
-
-        if (player == null) return;
-        MatchMade?.Invoke();
+        if (!PhotonNetwork.IsMasterClient) return;
+        
+        if (obj is Player player) MatchMade?.Invoke();
     }
 
     public void Dispose()
