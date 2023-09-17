@@ -6,11 +6,7 @@ public class MatchData
 {
     private Type _matchType;
 
-    public Type MatchType
-    {
-        get => _matchType;
-        set => _matchType = value;
-    }
+    public Type MatchType => _matchType;
 
     public MatchData(IMatchBehaviour match)
     {
