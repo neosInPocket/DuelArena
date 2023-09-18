@@ -4,7 +4,7 @@ public static class MatchLoader
 {
     public static void LoadMatch(IMatchBehaviour match)
     {
-        MatchDataSaveLoader.SaveMatchData(new MatchData(match));
+        MatchDataSaveLoader.Save(new MatchData(match));
         PhotonNetwork.LoadLevel(1);
     }
 }

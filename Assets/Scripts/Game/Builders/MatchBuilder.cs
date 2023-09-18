@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class MatchBuilder : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private MatchData _matchData;
+	
+	[Inject]
+	private void Construct(MatchData matchData)
+	{
+		_matchData = matchData;
+	}
 }

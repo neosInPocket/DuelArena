@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using System;
-using Unity.VisualScripting.Dependencies.NCalc;
+using Zenject;
 
-public static class MatchDataSaveLoader
+public class MatchDataSaveLoader : IFactory<MatchData>
 {
     private const string SavefilePath = "Data/MatchDTO";
 
-    public static void SaveMatchData(MatchData data)
+    public static void Save(MatchData data)
     {
         var saveFile = Resources.Load<MatchDTO>(SavefilePath);
 
@@ -18,7 +15,7 @@ public static class MatchDataSaveLoader
         saveFile.Data = data;
     }
 
-    public static MatchData LoadMatchData()
+    public MatchData Create()
     {
         var saveFile = Resources.Load<MatchDTO>(SavefilePath);
 
